@@ -10,6 +10,8 @@ public class Bob {
     public Sprite bobSprite;
     boolean isLeftPressed;
     boolean isRightPressed;
+    boolean isLeftPaddleTouched;
+    boolean isRightPaddleTouched;
 
     public void render(SpriteBatch batch) {
         bobSprite.draw(batch);
@@ -43,5 +45,19 @@ public class Bob {
         }else if (isRightPressed) {
             move(X_MOVE_UNITS, 0);
         }
+    }
+
+    public void setLeftPaddleTouched(boolean isTouched) {
+        if (isRightPaddleTouched && isTouched) {
+            isRightPaddleTouched = false;
+        }
+        isLeftPaddleTouched = isTouched;
+    }
+
+    public void setRightPaddleTouched(boolean isTouched) {
+        if (isLeftPaddleTouched && isTouched) {
+            isLeftPaddleTouched = false;
+        }
+        isRightPaddleTouched = isTouched;
     }
 }

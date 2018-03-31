@@ -24,4 +24,24 @@ public class InputManager extends InputAdapter{
         }
         return false;
     }
+
+    boolean isLeftPaddleTouched(float touchX, float touchY) {
+        if ((touchX >= GameManager.leftPaddleSprite.getX())
+                && touchX <= (GameManager.leftPaddleSprite.getX() + GameManager.leftPaddleSprite.getWidth())
+                && (touchY >= GameManager.leftPaddleSprite.getY())
+                && touchY <= (GameManager.leftPaddleSprite.getY() + GameManager.leftPaddleSprite.getHeight())) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean isRightPaddleTouched(float touchX, float touchY) {
+        if ((touchX >= GameManager.rightPaddleSprite.getX())
+                && touchX <= (GameManager.rightPaddleSprite.getX() + GameManager.rightPaddleSprite.getWidth())
+                && (touchY >= GameManager.rightPaddleSprite.getY())
+                && touchY <= (GameManager.rightPaddleSprite.getY() + GameManager.rightPaddleSprite.getHeight())) {
+            return true;
+        }
+        return false;
+    }
 }
