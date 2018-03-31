@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import de.android.ayrathairullin.dungeonbob.managers.GameManager;
+import de.android.ayrathairullin.dungeonbob.managers.InputManager;
 
 public class GameScreen implements Screen {
     MainGame game;
@@ -22,6 +23,7 @@ public class GameScreen implements Screen {
         camera.setToOrtho(false);
         batch = new SpriteBatch();
         GameManager.initialize(width, height);
+        Gdx.input.setInputProcessor(new InputManager());
     }
 
     @Override

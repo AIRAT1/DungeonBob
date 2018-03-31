@@ -31,6 +31,7 @@ public class GameManager {
 
     public static void renderGame(SpriteBatch batch) {
         backgroundSprite.draw(batch);
+        bob.update();
         bob.render(batch);
     }
 
