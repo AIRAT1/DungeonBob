@@ -2,7 +2,6 @@ package de.android.ayrathairullin.dungeonbob.gameobjects;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,21 +23,21 @@ public class Bob {
     boolean isRightPaddleTouched;
 
     Animation walkAnimation;
-    Texture walkSheet;
+    TextureRegion walkSheet;
     TextureRegion currentFrame;
     float stateTime;
     boolean updateAnimationStateTime = false;
 
-    public void initialize(float width, float height, Texture walkSheet) {
+    public void initialize(float width, float height, TextureRegion walkSheet) {
         this.walkSheet = walkSheet;
-        TextureRegion[][] temp = TextureRegion.split(walkSheet, walkSheet.getWidth() / ANIMATION_FRAME_SIZE,
-                walkSheet.getHeight());
+        TextureRegion[][] temp = walkSheet.split(walkSheet.getRegionWidth() / ANIMATION_FRAME_SIZE,
+                walkSheet.getRegionHeight());
         TextureRegion[] walkFrames = temp[0];
         walkAnimation = new Animation(ANIMATION_TIME_PERIOD, walkFrames);
 
         bobSprite = new Sprite();
-        bobSprite.setSize((walkSheet.getWidth()/ANIMATION_FRAME_SIZE) * (width/BOB_RESIZE_FACTOR),
-                walkSheet.getHeight() * (width/BOB_RESIZE_FACTOR));
+        bobSprite.setSize((walkSheet.getRegionWidth() /ANIMATION_FRAME_SIZE) * (width/BOB_RESIZE_FACTOR),
+                walkSheet.getRegionHeight() * (width/BOB_RESIZE_FACTOR));
         setPosition(width / 2f, 0);
 
         walkAnimation.setPlayMode(Animation.PlayMode.LOOP);

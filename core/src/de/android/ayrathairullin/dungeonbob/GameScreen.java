@@ -13,7 +13,7 @@ import de.android.ayrathairullin.dungeonbob.managers.InputManager;
 public class GameScreen implements Screen {
     MainGame game;
     SpriteBatch batch;
-    OrthographicCamera camera;
+    public static OrthographicCamera camera;
 
     public GameScreen(MainGame game) {
         this.game = game;
@@ -39,6 +39,8 @@ public class GameScreen implements Screen {
         batch.begin();
         GameManager.renderGame(batch);
         batch.end();
+
+        GameManager.renderer.render();
     }
 
     @Override
