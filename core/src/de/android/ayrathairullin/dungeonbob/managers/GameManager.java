@@ -16,7 +16,7 @@ public class GameManager {
     public static final float PADDLE_VERT_POSITION_FACTOR = .01f;
 
     static Bob bob;
-    static Texture bobTexture;
+    static Texture bobSpriteSheet;
     public static Sprite backgroundSprite;
     public static Texture backgroundTexture;
 
@@ -27,11 +27,8 @@ public class GameManager {
 
     public static void initialize(float width, float height) {
         bob = new Bob();
-        bobTexture = new Texture(Gdx.files.internal("data/bob.png"));
-        bob.bobSprite = new Sprite(bobTexture);
-        bob.bobSprite.setSize(bob.bobSprite.getWidth() * (width / BOB_RESIZE_FACTOR),
-                bob.bobSprite.getHeight() * (width / BOB_RESIZE_FACTOR));
-        bob.setPosition(width / 2f, 0);
+        bobSpriteSheet = new Texture(Gdx.files.internal("data/bob_spritesheet.png"));
+        bob.initialize(width, height, bobSpriteSheet);
 
         backgroundTexture = new Texture(Gdx.files.internal("data/background.jpg"));
         backgroundSprite = new Sprite(backgroundTexture);
@@ -70,7 +67,7 @@ public class GameManager {
 
     public static void dispose() {
         backgroundTexture.dispose();
-        bobTexture.dispose();
+        bobSpriteSheet.dispose();
         leftPaddleTexture.dispose();
         rightPaddleTexture.dispose();
     }
