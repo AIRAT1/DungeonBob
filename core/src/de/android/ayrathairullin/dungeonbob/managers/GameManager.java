@@ -8,9 +8,23 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.EllipseMapObject;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
+import com.badlogic.gdx.maps.objects.PolylineMapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Ellipse;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Polyline;
+import com.badlogic.gdx.math.Rectangle;
+
+import java.util.Iterator;
 
 import de.android.ayrathairullin.dungeonbob.GameConstants;
 import de.android.ayrathairullin.dungeonbob.GameScreen;
@@ -38,13 +52,33 @@ public class GameManager {
     static TiledMap map;
     public static OrthogonalTiledMapRenderer renderer;
 
+    static MapObjects mapObjects;
+    static ShapeRenderer shapeRenderer;
+
     public static void initialize(float width, float height) {
         assetManager = new AssetManager();
         loadAssets();
 
         map = assetManager.get(GameConstants.LEVEL1);
+
+//        Iterator<String> iterator = map.getProperties().getKeys();
+//        while (iterator.hasNext()) {
+//            String key = iterator.next();
+//            System.out.println("Name: " + key + ", Value: " + map.getProperties().get(key));
+//        }
+
+//        TiledMapTileLayer tiledLayer = (TiledMapTileLayer)map.getLayers().get("Wall");
+//        tiledLayer.setOpacity(.25f);
+//        tiledLayer.setVisible(true);
+
+//        tiledLayer.getCell(8, 2).setRotation(Cell.ROTATE_90);
+//        tiledLayer.setCell(0, 0, null);
+        MapLayer objectLayer = map.getLayers().get("Objects");
+        mapObjects = objectLayer.getObjects();
+        shapeRenderer = new ShapeRenderer();
+
         renderer = new OrthogonalTiledMapRenderer(map, GameConstants.UNIT_SCALE);
-        GameScreen.camera.setToOrtho(false, 35, 20);
+        GameScreen.camera.setToOrtho(false, 35, 20); // TODO 15, 13
         GameScreen.camera.update();
         renderer.setView(GameScreen.camera);
 
@@ -102,5 +136,30 @@ public class GameManager {
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load(GameConstants.LEVEL1, TiledMap.class);
         assetManager.finishLoading();
+    }
+
+    public static void drawShapes() {
+        GameScreen.camera.update();
+        shapeRenderer.setProjectionMatrix(GameScreen.camera.combined.scl(GameConstants.UNIT_SCALE));
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(0, 1, 1, 1);
+        Iterator<MapObject> mapObjectIterator = mapObjects.iterator();
+        while (mapObjectIterator.hasNext()) {
+            MapObject mapObject = mapObjectIterator.next();
+            if (mapObject instanceof RectangleMapObject) {
+                Rectangle rectangle = ((RectangleMapObject)mapObject).getRectangle();
+                shapeRenderer.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+            }else if (mapObject instanceof PolygonMapObject) {
+                Polygon polygon = ((PolygonMapObject)mapObject).getPolygon();
+                shapeRenderer.polygon(polygon.getTransformedVertices());
+            }else if (mapObject instanceof EllipseMapObject) {
+                Ellipse ellipse = ((EllipseMapObject)mapObject).getEllipse();
+                shapeRenderer.ellipse(ellipse.x, ellipse.y, ellipse.width, ellipse.height);
+            }else if (mapObject instanceof PolylineMapObject) {
+                Polyline polyline = ((PolylineMapObject)mapObject).getPolyline();
+                shapeRenderer.polyline(polyline.getTransformedVertices());
+            }
+        }
+        shapeRenderer.end();
     }
 }

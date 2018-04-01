@@ -41,6 +41,7 @@ public class GameScreen implements Screen {
         batch.end();
 
         GameManager.renderer.render();
+        GameManager.drawShapes();
     }
 
     @Override

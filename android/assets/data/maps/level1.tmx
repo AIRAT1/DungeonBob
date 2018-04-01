@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="16" tileheight="16" infinite="0" nextobjectid="1">
+<map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="16" tileheight="16" infinite="0" nextobjectid="5">
+ <properties>
+  <property name="map name" value="level1"/>
+ </properties>
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="638" columns="22">
   <image source="tileset.jpeg" width="352" height="464"/>
  </tileset>
@@ -58,5 +61,16 @@
    eJxjYBgFo2AUjIKRAdqYBtoFECCOA1MLkOJPWrkFl7nU9Cux/qSlW2jtx6HqFlIBobikZd4lNn1QEp7USqsFUIxNDIbJtQOXfCEFmJB/8PmTEnuxYQDXUB2c
   </data>
  </layer>
- <objectgroup name="Objects"/>
+ <objectgroup name="Objects">
+  <object id="1" x="61" y="18" width="143" height="51"/>
+  <object id="2" x="86" y="97" width="92" height="33">
+   <ellipse/>
+  </object>
+  <object id="3" x="319" y="28">
+   <polygon points="0,0 92,-11 76,65 5,89"/>
+  </object>
+  <object id="4" x="228" y="93">
+   <polyline points="0,0 34,-23 58,18 38,63"/>
+  </object>
+ </objectgroup>
 </map>
