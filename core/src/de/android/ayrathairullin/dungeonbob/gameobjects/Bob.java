@@ -45,6 +45,12 @@ public class Bob {
         }else if (isRightPressed) {
             move(X_MOVE_UNITS, 0);
         }
+
+        if (isLeftPaddleTouched) {
+            move(- X_MOVE_UNITS, 0);
+        }else if (isRightPaddleTouched) {
+            move(X_MOVE_UNITS, 0);
+        }
     }
 
     public void setLeftPaddleTouched(boolean isTouched) {

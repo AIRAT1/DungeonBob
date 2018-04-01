@@ -23,7 +23,7 @@ public class GameScreen implements Screen {
         camera.setToOrtho(false);
         batch = new SpriteBatch();
         GameManager.initialize(width, height);
-        Gdx.input.setInputProcessor(new InputManager());
+        Gdx.input.setInputProcessor(new InputManager(camera));
     }
 
     @Override
