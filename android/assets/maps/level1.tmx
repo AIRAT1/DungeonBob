@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="right-down" width="50" height="20" tilewidth="16" tileheight="16" infinite="0" nextobjectid="66">
+ <properties>
+  <property name="prop" value="value"/>
+ </properties>
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="638" columns="22">
+  <image source="tileset.jpeg" width="352" height="464"/>
+  <terraintypes>
+   <terrain name="New Terrain" tile="-1"/>
+  </terraintypes>
+  <tile id="22">
+   <properties>
+    <property name="type" value="red brick"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="639" name="crystals" tilewidth="16" tileheight="16" tilecount="8" columns="8">
+  <image source="crystal.png" width="128" height="16"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="0" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer name="Background" width="50" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6FTVf/SJmMfSFg1VVVV9fUBCS7S8Q==
+  </data>
+ </layer>
+ <layer name="Wall" width="50" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztj0sKgDAQxYqX8Fc/N/XqLp1FFoJFR0gg0E2Zl1JERERERL7l6K73Aq4g/X2TeLeCdzs2kG603jyDrTt28MnmCczYETePYMaOuHkAs3f04B87ToGdHak=
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1"/>
+ <imagelayer name="House" x="585" y="99" offsetx="489" offsety="71">
+  <image source="house.png" width="144" height="144"/>
+ </imagelayer>
+</map>
