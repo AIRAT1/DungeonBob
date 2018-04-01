@@ -14,6 +14,9 @@ public class Bob {
     private static final float ANIMATION_TIME_PERIOD = .08f;
     public static final float BOB_RESIZE_FACTOR = 400;
 
+    enum Direction {LEFT, RIGHT}
+    Direction direction = Direction.RIGHT;
+
     public Sprite bobSprite;
     boolean isLeftPressed;
     boolean isRightPressed;
@@ -44,6 +47,11 @@ public class Bob {
 
     public void render(SpriteBatch batch) {
         bobSprite.setRegion(currentFrame);
+        if (direction == Direction.LEFT) {
+            bobSprite.flip(true, false);
+        }else {
+            bobSprite.flip(false, false);
+        }
         bobSprite.draw(batch);
     }
 
@@ -74,17 +82,21 @@ public class Bob {
 
         if (isLeftPressed) {
             updateAnimationStateTime = true;
+            direction = Direction.LEFT;
             move(- X_MOVE_UNITS, 0);
         }else if (isRightPressed) {
             updateAnimationStateTime = true;
+            direction = Direction.RIGHT;
             move(X_MOVE_UNITS, 0);
         }
 
         if (isLeftPaddleTouched) {
             updateAnimationStateTime = true;
+            direction = Direction.LEFT;
             move(- X_MOVE_UNITS, 0);
         }else if (isRightPaddleTouched) {
             updateAnimationStateTime = true;
+            direction = Direction.RIGHT;
             move(X_MOVE_UNITS, 0);
         }
 
