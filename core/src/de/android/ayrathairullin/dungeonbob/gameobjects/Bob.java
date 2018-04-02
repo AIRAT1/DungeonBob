@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import de.android.ayrathairullin.dungeonbob.GameConstants;
+
 public class Bob {
-    private static final float X_MOVE_UNITS = 3f;
+    private static final float X_MOVE_UNITS = .1f;
     private static final int ANIMATION_FRAME_SIZE = 8;
     private static final float ANIMATION_TIME_PERIOD = .08f;
-    public static final float BOB_RESIZE_FACTOR = 400;
+    public static final float BOB_RESIZE_FACTOR = 700;
 
     enum Direction {LEFT, RIGHT}
     Direction direction = Direction.RIGHT;
@@ -38,7 +40,8 @@ public class Bob {
         bobSprite = new Sprite();
         bobSprite.setSize((walkSheet.getRegionWidth() /ANIMATION_FRAME_SIZE) * (width/BOB_RESIZE_FACTOR),
                 walkSheet.getRegionHeight() * (width/BOB_RESIZE_FACTOR));
-        setPosition(width / 2f, 0);
+        bobSprite.setSize(bobSprite.getWidth() * GameConstants.UNIT_SCALE, bobSprite.getHeight() * GameConstants.UNIT_SCALE);
+        setPosition(0, 2);
 
         walkAnimation.setPlayMode(Animation.PlayMode.LOOP);
         currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);

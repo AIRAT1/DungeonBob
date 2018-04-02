@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
@@ -55,11 +55,14 @@ public class GameManager {
     static MapObjects mapObjects;
     static ShapeRenderer shapeRenderer;
 
+    public static int mapWidth, mapHeight;
+
     public static void initialize(float width, float height) {
         assetManager = new AssetManager();
         loadAssets();
 
         map = assetManager.get(GameConstants.LEVEL1);
+        setMapDimensions();
 
 //        Iterator<String> iterator = map.getProperties().getKeys();
 //        while (iterator.hasNext()) {
@@ -73,12 +76,14 @@ public class GameManager {
 
 //        tiledLayer.getCell(8, 2).setRotation(Cell.ROTATE_90);
 //        tiledLayer.setCell(0, 0, null);
-        MapLayer objectLayer = map.getLayers().get("Objects");
-        mapObjects = objectLayer.getObjects();
-        shapeRenderer = new ShapeRenderer();
+
+//        MapLayer objectLayer = map.getLayers().get("Objects");
+//        mapObjects = objectLayer.getObjects();
+//        shapeRenderer = new ShapeRenderer();
 
         renderer = new OrthogonalTiledMapRenderer(map, GameConstants.UNIT_SCALE);
-        GameScreen.camera.setToOrtho(false, 35, 20); // TODO 15, 13
+//        GameScreen.camera.setToOrtho(false, 35, 20); // TODO 15, 13
+        GameScreen.camera.setToOrtho(false, 15, 13); //
         GameScreen.camera.update();
         renderer.setView(GameScreen.camera);
 
@@ -115,11 +120,19 @@ public class GameManager {
     }
 
     public static void renderGame(SpriteBatch batch) {
-//        backgroundSprite.draw(batch); // TODO uncomment for drawing
-//        bob.update();
-//        bob.render(batch);
-//        leftPaddleSprite.draw(batch);
-//        rightPaddleSprite.draw(batch);
+        backgroundSprite.draw(batch); // TODO uncomment for drawing
+        bob.update();
+        bob.render(batch);
+        GameScreen.camera.position.x = bob.bobSprite.getX();
+        if (!((GameScreen.camera.position.x - GameScreen.camera.viewportWidth / 2) > 0)) {
+            GameScreen.camera.position.x = GameScreen.camera.viewportWidth / 2;
+        }else if (((GameScreen.camera.position.x + GameScreen.camera.viewportWidth / 2) >= mapWidth)) {
+            GameScreen.camera.position.x = mapWidth - GameScreen.camera.viewportWidth / 2;
+        }
+        renderer.setView(GameScreen.camera);
+        GameScreen.camera.update();
+        leftPaddleSprite.draw(batch);
+        rightPaddleSprite.draw(batch);
     }
 
     public static void dispose() {
@@ -161,5 +174,11 @@ public class GameManager {
             }
         }
         shapeRenderer.end();
+    }
+
+    static void setMapDimensions() {
+        MapProperties properties = map.getProperties();
+        mapHeight = Integer.parseInt(properties.get("height").toString());
+        mapWidth = Integer.parseInt(properties.get("height").toString());
     }
 }
