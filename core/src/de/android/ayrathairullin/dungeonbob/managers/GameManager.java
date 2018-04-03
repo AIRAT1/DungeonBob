@@ -127,10 +127,10 @@ public class GameManager {
         bob.update();
         bob.render(batch);
         GameScreen.camera.position.x = bob.bobSprite.getX();
-        if (!((GameScreen.camera.position.x - GameScreen.camera.viewportWidth / 2) > 0)) {
-            GameScreen.camera.position.x = GameScreen.camera.viewportWidth / 2;
-        }else if (((GameScreen.camera.position.x + GameScreen.camera.viewportWidth / 2) >= mapWidth)) {
-            GameScreen.camera.position.x = mapWidth - GameScreen.camera.viewportWidth / 2;
+        if(!((GameScreen.camera.position.x-GameScreen.camera.viewportWidth/2)>0)){
+            GameScreen.camera.position.x = GameScreen.camera.viewportWidth/2;
+        }else if(((GameScreen.camera.position.x+GameScreen.camera.viewportWidth/2)>=mapWidth)){
+            GameScreen.camera.position.x = mapWidth - GameScreen.camera.viewportWidth/2;
         }
         renderer.setView(GameScreen.camera);
         GameScreen.camera.update();
