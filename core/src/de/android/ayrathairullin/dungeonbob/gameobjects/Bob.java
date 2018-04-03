@@ -39,6 +39,7 @@ public class Bob {
 
     Vector2 velocity;
     Rectangle bobRectangle;
+    boolean isGrounded = false;
 
     public void initialize(float width, float height, TextureRegion walkSheet) {
         this.walkSheet = walkSheet;
@@ -185,6 +186,7 @@ public class Bob {
                     bobSprite.setY(tile.y - bobSprite.getHeight());
                 }else if (velocity.y < 0) {
                     bobSprite.setY(tile.y + tile.height);
+                    isGrounded = true;
                 }
                 velocity.y = 0;
                 break;
@@ -193,6 +195,9 @@ public class Bob {
     }
 
     public void jump() {
-        velocity.y = JUMP_VELOCITY;
+        if (isGrounded) {
+            velocity.y = JUMP_VELOCITY;
+            isGrounded = false;
+        }
     }
 }

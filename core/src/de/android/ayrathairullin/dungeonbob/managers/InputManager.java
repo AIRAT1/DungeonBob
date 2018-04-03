@@ -66,6 +66,8 @@ public class InputManager extends InputAdapter{
             GameManager.bob.setLeftPaddleTouched(true);
         }else if (isRightPaddleTouched(touchX, touchY)) {
             GameManager.bob.setRightPaddleTouched(true);
+        }else if (isJumpButtonTouched(touchX, touchY)) {
+            GameManager.bob.jump();
         }
         return false;
     }
@@ -80,6 +82,16 @@ public class InputManager extends InputAdapter{
             GameManager.bob.setLeftPaddleTouched(false);
         }else if (isRightPaddleTouched(touchX, touchY)) {
             GameManager.bob.setRightPaddleTouched(false);
+        }
+        return false;
+    }
+
+    boolean isJumpButtonTouched(float touchX, float touchY) {
+        if ((touchX >= GameManager.jumpButtonSprite.getX())
+                && touchX <= (GameManager.jumpButtonSprite.getX() + GameManager.jumpButtonSprite.getWidth())
+                && touchY >= GameManager.jumpButtonSprite.getY()
+                && touchY <= GameManager.jumpButtonSprite.getY() + GameManager.jumpButtonSprite.getHeight()) {
+            return true;
         }
         return false;
     }

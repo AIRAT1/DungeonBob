@@ -9,4 +9,5 @@ public class GameConstants {
     public static final String TEXTURE_PACK = "data/pack1.pack";
     public static final String LEVEL1 = "data/maps/level1.tmx";
     public static final float UNIT_SCALE = 1 / 16f;
+    public static final String JUMP_IMAGE = "buttonA";
 }

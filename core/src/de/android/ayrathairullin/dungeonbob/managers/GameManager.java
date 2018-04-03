@@ -58,6 +58,9 @@ public class GameManager {
 
     public static int mapWidth, mapHeight;
 
+    static TextureRegion jumpButtonTexture;
+    static Sprite jumpButtonSprite;
+
     public static void initialize(float width, float height) {
         assetManager = new AssetManager();
         loadAssets();
@@ -99,6 +102,7 @@ public class GameManager {
 
         initializeLeftPaddle(width, height);
         initializeRightPaddle(width, height);
+        initializeJumpButton(width, height);
 
         MapUtils.initialize(map);
     }
@@ -138,6 +142,7 @@ public class GameManager {
         batch.setProjectionMatrix(GameScreen.hudCamera.combined);
         leftPaddleSprite.draw(batch);
         rightPaddleSprite.draw(batch);
+        jumpButtonSprite.draw(batch);
     }
 
     public static void dispose() {
@@ -189,5 +194,14 @@ public class GameManager {
 
     public static void renderBackground(SpriteBatch batch) {
         backgroundSprite.draw(batch);
+    }
+
+    public static void initializeJumpButton(float width, float height) {
+        jumpButtonTexture = texturePack.findRegion(GameConstants.JUMP_IMAGE);
+        jumpButtonSprite = new Sprite(jumpButtonTexture);
+        jumpButtonSprite.setSize(jumpButtonSprite.getWidth() * (width / PADDLE_RESIZE_FACTOR),
+                jumpButtonSprite.getHeight() * (width / PADDLE_RESIZE_FACTOR));
+        jumpButtonSprite.setPosition(width * .9f, height * .01f);
+        jumpButtonSprite.setAlpha(.25f);
     }
 }
