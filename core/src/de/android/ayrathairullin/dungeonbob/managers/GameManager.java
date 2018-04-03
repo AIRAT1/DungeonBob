@@ -120,7 +120,7 @@ public class GameManager {
     }
 
     public static void renderGame(SpriteBatch batch) {
-        backgroundSprite.draw(batch); // TODO uncomment for drawing
+        batch.setProjectionMatrix(GameScreen.camera.combined);
         bob.update();
         bob.render(batch);
         GameScreen.camera.position.x = bob.bobSprite.getX();
@@ -131,6 +131,8 @@ public class GameManager {
         }
         renderer.setView(GameScreen.camera);
         GameScreen.camera.update();
+
+        batch.setProjectionMatrix(GameScreen.hudCamera.combined);
         leftPaddleSprite.draw(batch);
         rightPaddleSprite.draw(batch);
     }
@@ -180,5 +182,9 @@ public class GameManager {
         MapProperties properties = map.getProperties();
         mapHeight = Integer.parseInt(properties.get("height").toString());
         mapWidth = Integer.parseInt(properties.get("height").toString());
+    }
+
+    public static void renderBackground(SpriteBatch batch) {
+        backgroundSprite.draw(batch);
     }
 }

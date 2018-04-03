@@ -13,17 +13,19 @@ import de.android.ayrathairullin.dungeonbob.managers.InputManager;
 public class GameScreen implements Screen {
     MainGame game;
     SpriteBatch batch;
-    public static OrthographicCamera camera;
+    public static OrthographicCamera camera, hudCamera;
 
     public GameScreen(MainGame game) {
         this.game = game;
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(width, height);
+        hudCamera = new OrthographicCamera(width, height);
         camera.setToOrtho(false);
+        hudCamera.setToOrtho(false);
         batch = new SpriteBatch();
         GameManager.initialize(width, height);
-        Gdx.input.setInputProcessor(new InputManager(camera));
+        Gdx.input.setInputProcessor(new InputManager(hudCamera));
     }
 
     @Override
@@ -35,12 +37,16 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.setProjectionMatrix(camera.combined);
+        batch.setProjectionMatrix(hudCamera.combined);
         batch.begin();
-        GameManager.renderGame(batch);
+        GameManager.renderBackground(batch);
         batch.end();
 
         GameManager.renderer.render();
+
+        batch.begin();
+        GameManager.renderGame(batch);
+        batch.end();
 //        GameManager.drawShapes();
     }
 
