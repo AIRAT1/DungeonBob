@@ -6,14 +6,21 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 import de.android.ayrathairullin.dungeonbob.GameConstants;
+import de.android.ayrathairullin.dungeonbob.utils.MapUtils;
 
 public class Bob {
-    private static final float X_MOVE_UNITS = .1f;
+    private static final float MAX_VELOCITY = .1f;
     private static final int ANIMATION_FRAME_SIZE = 8;
     private static final float ANIMATION_TIME_PERIOD = .08f;
     public static final float BOB_RESIZE_FACTOR = 700;
+    private static final float DAMPING = .03f;
+    private static final Vector2 gravity = new Vector2(0, - .02f);
+    private static final float JUMP_VELOCITY = .35f;
 
     enum Direction {LEFT, RIGHT}
     Direction direction = Direction.RIGHT;
@@ -30,6 +37,9 @@ public class Bob {
     float stateTime;
     boolean updateAnimationStateTime = false;
 
+    Vector2 velocity;
+    Rectangle bobRectangle;
+
     public void initialize(float width, float height, TextureRegion walkSheet) {
         this.walkSheet = walkSheet;
         TextureRegion[][] temp = walkSheet.split(walkSheet.getRegionWidth() / ANIMATION_FRAME_SIZE,
@@ -45,6 +55,10 @@ public class Bob {
 
         walkAnimation.setPlayMode(Animation.PlayMode.LOOP);
         currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);
+
+        velocity = new Vector2(0, 0);
+
+        bobRectangle = new Rectangle();
     }
 
     public void render(SpriteBatch batch) {
@@ -83,26 +97,41 @@ public class Bob {
         updateAnimationStateTime = false;
 
         if (isLeftPressed) {
-            updateAnimationStateTime = true;
             direction = Direction.LEFT;
-            move(- X_MOVE_UNITS, 0);
+            velocity.x = - MAX_VELOCITY;
         }else if (isRightPressed) {
-            updateAnimationStateTime = true;
             direction = Direction.RIGHT;
-            move(X_MOVE_UNITS, 0);
+            velocity.x = MAX_VELOCITY;
         }
 
         if (isLeftPaddleTouched) {
-            updateAnimationStateTime = true;
             direction = Direction.LEFT;
-            move(- X_MOVE_UNITS, 0);
+            velocity.x = - MAX_VELOCITY;
         }else if (isRightPaddleTouched) {
-            updateAnimationStateTime = true;
             direction = Direction.RIGHT;
-            move(X_MOVE_UNITS, 0);
+            velocity.x = MAX_VELOCITY;
         }
 
-        if (updateAnimationStateTime) {
+        if (velocity.x < 0) {
+            velocity.x += DAMPING;
+        }else if (velocity.x > 0) {
+            velocity.x -= DAMPING;
+        }
+
+        if (direction == Direction.RIGHT && velocity.x <= .02f) {
+            velocity.x = 0;
+        }else if (direction == Direction.LEFT && velocity.x >= -.02f) {
+            velocity.x = 0;
+        }
+
+        if (velocity.x != 0) {
+            updateAnimationStateTime = true;
+        }
+        velocity.add(gravity);
+        checkWallHit();
+        move(velocity.x, velocity.y);
+
+        if(updateAnimationStateTime){
             stateTime += Gdx.graphics.getDeltaTime();
             currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);
         }
@@ -120,5 +149,50 @@ public class Bob {
             isLeftPaddleTouched = false;
         }
         isRightPaddleTouched = isTouched;
+    }
+
+    public void checkWallHit() {
+        bobRectangle.set(bobSprite.getX(), bobSprite.getY(), bobSprite.getWidth(), bobSprite.getHeight());
+        int startX, startY, endX, endY;
+        if (velocity.x > 0) {
+            startX = endX = (int)(bobSprite.getX() + + bobSprite.getWidth() + velocity.x);
+        }else {
+            startX = endX = (int)(bobSprite.getX() + velocity.x);
+        }
+        startY = (int)bobSprite.getY();
+        endY = (int)(bobSprite.getY() + bobSprite.getHeight());
+        Array<Rectangle> tiles = MapUtils.getTiles(startX, startY, endX, endY, "Wall");
+        for (Rectangle tile : tiles) {
+            if (bobRectangle.overlaps(tile)) {
+                velocity.x = 0;
+                break;
+            }
+        }
+
+        bobRectangle.x = bobSprite.getX();
+        if (velocity.y > 0) {
+            startY = endY = (int)(bobSprite.getY() + bobSprite.getHeight());
+        }else {
+            startY = endY = (int)(bobSprite.getY() + velocity.y);
+        }
+        startX = (int)bobSprite.getX();
+        endX = (int)(bobSprite.getX() + bobSprite.getWidth());
+        tiles = MapUtils.getTiles(startX, startY, endX, endY, "Wall");
+        bobRectangle.y += velocity.y;
+        for (Rectangle tile : tiles) {
+            if (bobRectangle.overlaps(tile)) {
+                if (velocity.y > 0) {
+                    bobSprite.setY(tile.y - bobSprite.getHeight());
+                }else if (velocity.y < 0) {
+                    bobSprite.setY(tile.y + tile.height);
+                }
+                velocity.y = 0;
+                break;
+            }
+        }
+    }
+
+    public void jump() {
+        velocity.y = JUMP_VELOCITY;
     }
 }

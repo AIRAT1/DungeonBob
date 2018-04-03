@@ -20,6 +20,8 @@ public class InputManager extends InputAdapter{
             GameManager.bob.setLeftPressed(true);
         }else if (keycode == Keys.RIGHT) {
             GameManager.bob.setRightPressed(true);
+        }else if (keycode == Keys.SPACE) {
+            GameManager.bob.jump();
         }
         return false;
     }

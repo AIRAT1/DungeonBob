@@ -29,6 +29,7 @@ import java.util.Iterator;
 import de.android.ayrathairullin.dungeonbob.GameConstants;
 import de.android.ayrathairullin.dungeonbob.GameScreen;
 import de.android.ayrathairullin.dungeonbob.gameobjects.Bob;
+import de.android.ayrathairullin.dungeonbob.utils.MapUtils;
 
 public class GameManager {
     public static final float BOB_RESIZE_FACTOR = 400;
@@ -98,6 +99,8 @@ public class GameManager {
 
         initializeLeftPaddle(width, height);
         initializeRightPaddle(width, height);
+
+        MapUtils.initialize(map);
     }
 
     public static void initializeLeftPaddle(float width, float height) {

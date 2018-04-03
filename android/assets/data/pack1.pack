@@ -5,22 +5,29 @@ filter: Nearest,Nearest
 repeat: none
 bob_spritesheet
   rotate: false
-  xy: 1, 1
+  xy: 1, 8
   size: 192, 32
   orig: 192, 32
   offset: 0, 0
   index: -1
 paddleLeft
   rotate: false
-  xy: 195, 2
+  xy: 195, 9
   size: 39, 31
   orig: 39, 31
   offset: 0, 0
   index: -1
 paddleRight
   rotate: false
-  xy: 236, 2
+  xy: 236, 9
   size: 39, 31
   orig: 39, 31
+  offset: 0, 0
+  index: -1
+buttonA
+  rotate: false
+  xy: 277, 1
+  size: 31, 39
+  orig: 31, 39
   offset: 0, 0
   index: -1
