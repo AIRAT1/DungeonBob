@@ -1,65 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="16" tileheight="16" infinite="0" nextobjectid="5">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="16" tileheight="16" nextobjectid="96">
  <properties>
   <property name="map name" value="level1"/>
  </properties>
- <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="638" columns="22">
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="638">
   <image source="tileset.jpeg" width="352" height="464"/>
- </tileset>
- <tileset firstgid="639" name="crystals" tilewidth="16" tileheight="16" tilecount="8" columns="8">
-  <image source="crystal.png" width="128" height="16"/>
-  <tile id="7">
-   <animation>
-    <frame tileid="0" duration="100"/>
-    <frame tileid="1" duration="100"/>
-    <frame tileid="2" duration="100"/>
-    <frame tileid="3" duration="100"/>
-    <frame tileid="4" duration="100"/>
-    <frame tileid="5" duration="100"/>
-    <frame tileid="6" duration="100"/>
-    <frame tileid="7" duration="100"/>
-   </animation>
+  <terraintypes>
+   <terrain name="New Terrain" tile="-1"/>
+  </terraintypes>
+  <tile id="22">
+   <properties>
+    <property name="type" value="red brick"/>
+   </properties>
   </tile>
  </tileset>
- <tileset firstgid="647" name="crystals" tilewidth="16" tileheight="16" tilecount="8" columns="8">
-  <image source="crystal.png" width="128" height="16"/>
+ <tileset firstgid="639" name="collectibles" tilewidth="16" tileheight="16" tilecount="32">
+  <image source="crystals.png" width="128" height="64"/>
   <tile id="0">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
    <animation>
-    <frame tileid="7" duration="100"/>
-    <frame tileid="6" duration="100"/>
-    <frame tileid="5" duration="100"/>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
     <frame tileid="4" duration="100"/>
     <frame tileid="3" duration="100"/>
-    <frame tileid="2" duration="100"/>
-    <frame tileid="1" duration="100"/>
-    <frame tileid="0" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="points" value="20"/>
+   </properties>
+   <animation>
+    <frame tileid="9" duration="100"/>
+    <frame tileid="8" duration="100"/>
+    <frame tileid="10" duration="100"/>
+    <frame tileid="11" duration="100"/>
+    <frame tileid="12" duration="100"/>
+    <frame tileid="13" duration="100"/>
+    <frame tileid="14" duration="100"/>
+    <frame tileid="15" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="points" value="30"/>
+   </properties>
+   <animation>
+    <frame tileid="16" duration="100"/>
+    <frame tileid="17" duration="100"/>
+    <frame tileid="18" duration="100"/>
+    <frame tileid="19" duration="100"/>
+    <frame tileid="20" duration="100"/>
+    <frame tileid="21" duration="100"/>
+    <frame tileid="22" duration="100"/>
+    <frame tileid="23" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="points" value="40"/>
+   </properties>
+   <animation>
+    <frame tileid="24" duration="100"/>
+    <frame tileid="25" duration="100"/>
+    <frame tileid="26" duration="100"/>
+    <frame tileid="27" duration="100"/>
+    <frame tileid="28" duration="100"/>
+    <frame tileid="29" duration="100"/>
+    <frame tileid="30" duration="100"/>
+    <frame tileid="31" duration="100"/>
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="655" name="crystals" tilewidth="16" tileheight="16" tilecount="8" columns="8">
-  <image source="crystal.png" width="128" height="16"/>
-  <tile id="0">
-   <animation>
-    <frame tileid="7" duration="100"/>
-    <frame tileid="6" duration="100"/>
-    <frame tileid="5" duration="100"/>
-    <frame tileid="4" duration="100"/>
-    <frame tileid="3" duration="100"/>
-    <frame tileid="2" duration="100"/>
-    <frame tileid="1" duration="100"/>
-    <frame tileid="0" duration="100"/>
-   </animation>
-  </tile>
+ <tileset firstgid="671" name="letters" tilewidth="16" tileheight="16" tilecount="1">
+  <image source="zombie_letter.png" width="16" height="16"/>
  </tileset>
- <layer name="Background" width="35" height="20">
+ <layer name="Wall" width="30" height="15">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20PBxQAAPwaCvAAAQ==
+   eJxjYBgFo2AUgIA4BWrE0TCp9hKDhwLAFz60tJMW4UYtM0iVQxenRZrCpWagAbF5gdpuBQAS8gU3
   </data>
  </layer>
- <layer name="Wall" width="35" height="20">
+ <objectgroup name="Enemies">
+  <object id="87" name="zombie" gid="671" x="320.667" y="96" width="16" height="16"/>
+  <object id="88" name="zombie" gid="671" x="153.167" y="143.333" width="16" height="16"/>
+  <object id="90" name="zombie" gid="671" x="289.167" y="174.333" width="16" height="16"/>
+ </objectgroup>
+ <layer name="Hazards" width="30" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIKRAdqYBtoFECCOA1MLkOJPWrkFl7nU9Cux/qSlW2gdl0PVLaQCQnFJy7xLbPqgJEyplVYLoBibGAyTawcu+UIKMCH/4PMnJfZiwwA/TB1u
+   eJxjYBgFo2AUjIJRMAqGFsinIgYAUJ8IPg==
   </data>
  </layer>
- <objectgroup name="Objects"/>
+ <layer name="Collectibles" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2B4gnamgdU/GEE/Hf00nUp2UcvN1HBPPQ3CjxZmjgLSAAAEpARp
+  </data>
+ </layer>
 </map>
