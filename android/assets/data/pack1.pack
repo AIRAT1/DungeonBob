@@ -3,45 +3,73 @@ pack1.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+skeleton_spritesheet
+  rotate: false
+  xy: 1, 177
+  size: 575, 53
+  orig: 575, 53
+  offset: 0, 0
+  index: -1
+star
+  rotate: false
+  xy: 1, 47
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
 bob_spritesheet
   rotate: false
-  xy: 1, 14
+  xy: 578, 198
   size: 192, 32
   orig: 192, 32
   offset: 0, 0
   index: -1
 zombie_spritesheet
   rotate: false
-  xy: 195, 2
+  xy: 1, 1
   size: 87, 44
   orig: 87, 44
   offset: 0, 0
   index: -1
 buttonA
   rotate: false
-  xy: 284, 11
+  xy: 131, 140
+  size: 35, 35
+  orig: 35, 35
+  offset: 0, 0
+  index: -1
+buttonB
+  rotate: false
+  xy: 90, 10
   size: 35, 35
   orig: 35, 35
   offset: 0, 0
   index: -1
 paddleLeft
   rotate: false
-  xy: 321, 15
+  xy: 772, 199
   size: 39, 31
   orig: 39, 31
   offset: 0, 0
   index: -1
 paddleRight
   rotate: false
-  xy: 362, 15
+  xy: 168, 144
   size: 39, 31
   orig: 39, 31
   offset: 0, 0
   index: -1
 zombie
   rotate: false
-  xy: 403, 1
+  xy: 131, 93
   size: 23, 45
   orig: 23, 45
+  offset: 0, 0
+  index: -1
+bullet
+  rotate: false
+  xy: 578, 183
+  size: 26, 13
+  orig: 26, 13
   offset: 0, 0
   index: -1

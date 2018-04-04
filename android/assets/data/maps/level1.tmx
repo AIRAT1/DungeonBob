@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="16" tileheight="16" nextobjectid="96">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="16" tileheight="16" nextobjectid="123">
  <properties>
   <property name="map name" value="level1"/>
  </properties>
@@ -11,6 +11,11 @@
   <tile id="22">
    <properties>
     <property name="type" value="red brick"/>
+   </properties>
+  </tile>
+  <tile id="132">
+   <properties>
+    <property name="door" value="true"/>
    </properties>
   </tile>
  </tileset>
@@ -77,18 +82,21 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="671" name="letters" tilewidth="16" tileheight="16" tilecount="1">
-  <image source="zombie_letter.png" width="16" height="16"/>
+ <tileset firstgid="671" name="letters" tilewidth="16" tileheight="16" tilecount="2">
+  <image source="letters.png" width="32" height="16"/>
  </tileset>
  <layer name="Wall" width="30" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUgIA4BWrE0TCp9hKDhwLAFz60tJMW4UYtM0iVQxenRZrCpWagAbF5gdpuBQAS8gU3
+   eJxjYBgFAwXEceBRMDCAmLDHpYaSOMSVDoZiusAXPrS0kxbhRi0zSJVDF6dFmsKlZqABsXmB2m4FAAszBcE=
   </data>
  </layer>
  <objectgroup name="Enemies">
-  <object id="87" name="zombie" gid="671" x="320.667" y="96" width="16" height="16"/>
-  <object id="88" name="zombie" gid="671" x="153.167" y="143.333" width="16" height="16"/>
-  <object id="90" name="zombie" gid="671" x="289.167" y="174.333" width="16" height="16"/>
+  <object id="105" name="zombie" gid="671" x="161" y="144" width="16" height="16"/>
+  <object id="106" name="zombie" gid="671" x="303" y="175.5" width="16" height="16"/>
+  <object id="110" name="skeleton" gid="672" x="340" y="94.5" width="16" height="16"/>
+  <object id="115" name="star" x="193.5" y="86.5">
+   <polygon points="-12,-0.5 -137.5,-1 -139,-42 -12,-43"/>
+  </object>
  </objectgroup>
  <layer name="Hazards" width="30" height="15">
   <data encoding="base64" compression="zlib">
@@ -98,6 +106,11 @@
  <layer name="Collectibles" width="30" height="15">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2B4gnamgdU/GEE/Hf00nUp2UcvN1HBPPQ3CjxZmjgLSAAAEpARp
+  </data>
+ </layer>
+ <layer name="key items" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjILBD1oH2gGjYNgCAEDjAIY=
   </data>
  </layer>
 </map>
